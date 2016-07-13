@@ -5,7 +5,20 @@
     <title>Microscope assistant</title>
 </head>
 <body>
-    <h1>My shiny metal page</h1>
-    <p>(Yeah of course it works, asshole)</p>
+    <div>
+        <h1>My shiny metal page</h1>
+        <p>(Yeah of course it works, asshole)</p>
+    </div>
+    <div>
+        <h2>Posts</h2>
+        {% for post in posts %}
+            <div>
+                <p>published: {{ post.published_date }}</p>
+                <h3><a href="">{{ post.title }}</a></h3>
+                <p>{{ post.text|linebreaksbr }}</p>
+            </div>
+            {{ post }}
+        {% endfor %}
+    </div>
 </body>
 </html>
