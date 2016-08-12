@@ -1,9 +1,9 @@
 from django import forms
 
-from .models import Post
+from .models import Card
 
 class PostForm(forms.ModelForm):
 
     class Meta:
-        model = Post
+        model = Card
         fields = ('title', 'text',)
