@@ -5,8 +5,10 @@
         <div class="game">
             <div class="date">
                 {{ game.created }}
+                <a class="btn btn-default" href="{% url 'game_edit' pk=game.pk %}"><span class="glyphicon glyphicon-pencil"></span></a>
+                <a class="btn btn-default" href=""><span class="glyphicon glyphicon-trash"></span></a>
             </div>
-            <h1><a href="{% url 'tribute.views.game_edit' pk=game.pk %}">{{ game.name }}</a></h1>
+            <h1><a href="{% url 'tribute.views.game_play' pk=game.pk %}">{{ game.name }}</a></h1>
             <p>{{ game.big_picture|linebreaksbr }}</p>
             <p>{{ game.last_edit }}</p>
         </div>

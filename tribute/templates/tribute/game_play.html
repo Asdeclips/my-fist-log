@@ -4,6 +4,7 @@
     <div class="date">
         Created: {{ game.created }}
         <a class="btn btn-default" href="{% url 'game_edit' pk=game.pk %}"><span class="glyphicon glyphicon-pencil"></span></a>
+        <a class="btn btn-default" href="{% url 'tribute.views.game_delete' pk=game.pk %}"><span class="glyphicon glyphicon-trash"></span></a>
     </div>
     <h1>{{ game.name }}</h1>
     <p>{{ game.big_picture|linebreaksbr }}</p>

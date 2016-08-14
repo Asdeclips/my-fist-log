@@ -26,7 +26,6 @@ def game_new(request):
 
 def game_edit(request, pk):
     game = get_object_or_404(Game, pk=pk)
-    print("Editing game. pk = " + pk)
     if request.method == "POST":
         form = GameForm(request.POST, instance=game)
         if form.is_valid():
@@ -37,3 +36,8 @@ def game_edit(request, pk):
     else:
         form = GameForm(instance=game)
     return render(request, 'tribute/game_edit.html', {'form': form})
+
+def game_delete(request, pk):
+    game = get_object_or_404(Game, pk=pk)
+    game.delete()
+    return redirect('/')
