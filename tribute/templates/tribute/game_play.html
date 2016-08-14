@@ -2,11 +2,14 @@
 
 {% block content %}
     <div class="date">
-        {% if game.published_date %}
-            {{ game.published_date }}
-        {% endif %}
+        Created: {{ game.created }}
         <a class="btn btn-default" href="{% url 'game_edit' pk=game.pk %}"><span class="glyphicon glyphicon-pencil"></span></a>
     </div>
-    <h1>{{ game.title }}</h1>
-    <p>{{ game.text|linebreaksbr }}</p>
+    <h1>{{ game.name }}</h1>
+    <p>{{ game.big_picture|linebreaksbr }}</p>
+    <div class="palette">
+        {% if game.palette %}
+            {{ game.palette }}
+        {% endif %}
+    </div>
 {% endblock %}

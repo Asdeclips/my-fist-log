@@ -9,8 +9,8 @@ def game_list(request):
     return render(request, 'tribute/game_list.html', {'games': games})
 
 def game_play(request, pk):
-    post = get_object_or_404(Game, pk=pk)
-    return render(request, 'tribute/game_play.html', {'post': post})
+    game = get_object_or_404(Game, pk=pk)
+    return render(request, 'tribute/game_play.html', {'game': game})
 
 def game_new(request):
     if request.method == "POST":
