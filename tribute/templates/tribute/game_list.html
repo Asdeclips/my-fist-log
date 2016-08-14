@@ -1,0 +1,14 @@
+{% extends 'tribute/base.html' %}
+
+{% block content %}
+    {% for game in games %}
+        <div class="game">
+            <div class="date">
+                {{ game.created }}
+            </div>
+            <h1><a href="{% url 'tribute.views.game_edit' pk=game.pk %}">{{ game.name }}</a></h1>
+            <p>{{ game.big_picture|linebreaksbr }}</p>
+            <p>{{ game.last_edit }}</p>
+        </div>
+    {% endfor %}
+{% endblock content %}

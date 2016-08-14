@@ -1,39 +1,39 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.utils import timezone
 
-from .models import Card
-from .forms import PostForm
+from .models import Game, Card
+from .forms import GameForm
 
-def post_list(request):
-    posts = Card.objects.filter(published_date__lte=timezone.now()).order_by('published_date')
-    return render(request, 'tribute/post_list.html', {'posts': posts})
+def game_list(request):
+    games = Game.objects.filter(created__lte=timezone.now()).order_by('-last_edit')
+    return render(request, 'tribute/game_list.html', {'games': games})
 
-def post_detail(request, pk):
-    post = get_object_or_404(Card, pk=pk)
-    return render(request, 'tribute/post_detail.html', {'post': post})
+def game_play(request, pk):
+    post = get_object_or_404(Game, pk=pk)
+    return render(request, 'tribute/game_play.html', {'post': post})
 
-def post_new(request):
+def game_new(request):
     if request.method == "POST":
-        form = PostForm(request.POST)
+        form = GameForm(request.POST)
         if form.is_valid():
-            post = form.save(commit=False)
-            post.author = request.user
-            post.published_date = timezone.now()
-            post.save()
-            return redirect('tribute.views.post_detail', pk=post.pk)
+            game = form.save(commit=False)
+            game.created = timezone.now()
+            game.save()
+            return redirect('tribute.views.game_play', pk=game.pk)
     else:
-        form = PostForm()
-    return render(request, 'tribute/post_edit.html', {'form': form})
+        form = GameForm()
+    return render(request, 'tribute/game_edit.html', {'form': form})
 
-def post_edit(request,pk):
-    post = get_object_or_404(Card, pk=pk)
+def game_edit(request, pk):
+    game = get_object_or_404(Game, pk=pk)
+    print("Editing game. pk = " + pk)
     if request.method == "POST":
-        form = PostForm(request.POST, instance=post)
+        form = GameForm(request.POST, instance=game)
         if form.is_valid():
-            post = form.save(commit=False)
-            post.author = request.user
-            post.save()
-            return redirect('tribute.views.post_detail', pk=post.pk)
+            game = form.save(commit=False)
+            game.last_edit = timezone.now()
+            game.save()
+            return redirect('tribute.views.game_play', pk=game.pk)
     else:
-        form = PostForm(instance=post)
-    return render(request, 'tribute/post_edit.html', {'form': form})
+        form = GameForm(instance=game)
+    return render(request, 'tribute/game_edit.html', {'form': form})

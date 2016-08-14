@@ -8,7 +8,7 @@ class Game(models.Model):
     created = models.DateTimeField(default=timezone.now)
     last_edit = models.DateTimeField(blank=True, null=True)
     big_picture = models.CharField(max_length=500)
-    palette = models.TextField(max_length=200, blank=True)
+    palette = models.TextField(max_length=200, blank=True, null=True)
 
     def publish(self):
         self.last_edit = timezone.now()
